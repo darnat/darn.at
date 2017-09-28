@@ -32,6 +32,8 @@ gem 'jbuilder', '~> 2.5'
 
 # Authentifications Gem
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 # Helpers Gem
 gem 'country_select'
