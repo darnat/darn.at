@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170927013625) do
+ActiveRecord::Schema.define(version: 20171001191145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,12 +18,41 @@ ActiveRecord::Schema.define(version: 20170927013625) do
   create_table "auth_providers", force: :cascade do |t|
     t.string "name"
     t.string "uid"
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name", "uid"], name: "index_auth_providers_on_name_and_uid", unique: true
     t.index ["name", "user_id"], name: "index_auth_providers_on_name_and_user_id", unique: true
     t.index ["user_id"], name: "index_auth_providers_on_user_id"
+  end
+
+  create_table "technologies", force: :cascade do |t|
+    t.string "title"
+    t.string "slug"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "technologies_tutorials", id: false, force: :cascade do |t|
+    t.bigint "technology_id", null: false
+    t.bigint "tutorial_id", null: false
+    t.index ["technology_id", "tutorial_id"], name: "index_technologies_tutorials_on_technology_id_and_tutorial_id"
+    t.index ["technology_id"], name: "index_technologies_tutorials_on_technology_id"
+    t.index ["tutorial_id", "technology_id"], name: "index_technologies_tutorials_on_tutorial_id_and_technology_id"
+    t.index ["tutorial_id"], name: "index_technologies_tutorials_on_tutorial_id"
+  end
+
+  create_table "tutorials", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.string "slug"
+    t.bigint "user_id", null: false
+    t.integer "published", limit: 2, default: -1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_tutorials_on_slug", unique: true
+    t.index ["user_id"], name: "index_tutorials_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,4 +84,7 @@ ActiveRecord::Schema.define(version: 20170927013625) do
   end
 
   add_foreign_key "auth_providers", "users", on_delete: :cascade
+  add_foreign_key "technologies_tutorials", "technologies", on_delete: :cascade
+  add_foreign_key "technologies_tutorials", "tutorials", on_delete: :cascade
+  add_foreign_key "tutorials", "users", on_delete: :cascade
 end

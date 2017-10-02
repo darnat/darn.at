@@ -3,6 +3,7 @@ class User < ApplicationRecord
 	attr_accessor :login
 
   has_many :auth_providers
+  has_many :tutorials
 
 	validates :username, presence: true, uniqueness: {case_sensitive: false}, format: {with: /\A[a-zA-Z0-9 _\.]*\z/}
   validates :country_code, length: {is: 2}, format: { with: /\A[A-Z]+\z/ }, allow_nil: true

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @technology.title %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @technology.slug %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @technology.body %>
+</p>
+
+<%= link_to 'Edit', edit_admin_technology_path(@technology) %> |
+<%= link_to 'Back', admin_technologies_path %>

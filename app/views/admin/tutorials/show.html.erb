@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @tutorial.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @tutorial.body %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @tutorial.slug %>
+</p>
+
+<p>
+  <strong>Published:</strong>
+  <%= @tutorial.published %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @tutorial.user %>
+</p>
+
+<%= link_to 'Edit', edit_admin_tutorial_path(@tutorial) %> |
+<%= link_to 'Back', admin_tutorials_path %>

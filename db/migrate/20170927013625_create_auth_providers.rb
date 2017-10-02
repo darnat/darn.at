@@ -3,7 +3,7 @@ class CreateAuthProviders < ActiveRecord::Migration[5.1]
     create_table :auth_providers do |t|
       t.string :name
       t.string :uid
-      t.references :user, foreign_key: { on_delete: :cascade }
+      t.references :user, index: true, null: false, foreign_key: { on_delete: :cascade }
 
       t.timestamps
     end
